@@ -423,19 +423,10 @@ function toggleMusic() {
 }
 
 function playSongForYou() {
-  // Song For You - Multiple sources
-  const audio = new Audio();
+  // Song For You - Play directly in the page
+  showNotification('🎵 Song For You 💕\n\nPlaying...');
   
-  // Try YouTube Music or streaming service
-  // Note: Direct Spotify URLs don't work due to DRM protection
-  // Opening Spotify link for user to listen
-  
-  showNotification('🎵 Song For You 💕\n\nOpening on Spotify...');
-  
-  // Open Spotify link in new window
-  window.open('https://open.spotify.com/track/6gprR0rGv59wALbBU7yZkl?si=bc85405e3fee4cf6', '_blank');
-  
-  // Play fallback romantic melody
+  // Play romantic melody inspired by "Song For You"
   playSongForYouMelody();
 }
 
