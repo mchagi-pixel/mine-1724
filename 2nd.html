@@ -297,7 +297,7 @@ opacity:0;
 <!-- Action Buttons -->
 <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
   <button onclick="celebrate()">🎉 Celebrate!</button>
-  <button onclick="playHindiSong()">🎵 Hindi Song</button>
+  <button onclick="playSongForYou()">🎵 Song For You</button>
   <button onclick="goBack()">← Back</button>
 </div>
 
@@ -420,6 +420,62 @@ function playMusic() {
 function toggleMusic() {
   playMusic();
   alert('🎵 Romantic melody playing... 💕');
+}
+
+function playSongForYou() {
+  // Song For You - Multiple sources
+  const audio = new Audio();
+  
+  // Try YouTube Music or streaming service
+  // Note: Direct Spotify URLs don't work due to DRM protection
+  // Opening Spotify link for user to listen
+  
+  showNotification('🎵 Song For You 💕\n\nOpening on Spotify...');
+  
+  // Open Spotify link in new window
+  window.open('https://open.spotify.com/track/6gprR0rGv59wALbBU7yZkl?si=bc85405e3fee4cf6', '_blank');
+  
+  // Play fallback romantic melody
+  playSongForYouMelody();
+}
+
+function playSongForYouMelody() {
+  // Romantic melody inspired by "Song For You"
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  
+  const notes = [
+    { freq: 329.63, duration: 0.6 },  // E
+    { freq: 329.63, duration: 0.3 },  // E
+    { freq: 392, duration: 0.6 },     // G
+    { freq: 440, duration: 0.6 },     // A
+    { freq: 494, duration: 0.6 },     // B
+    { freq: 523.25, duration: 0.8 },  // C
+    { freq: 494, duration: 0.4 },     // B
+    { freq: 440, duration: 0.4 },     // A
+    { freq: 392, duration: 0.4 },     // G
+    { freq: 329.63, duration: 1 },    // E
+  ];
+  
+  let currentTime = audioContext.currentTime;
+  
+  notes.forEach(note => {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = note.freq;
+    oscillator.type = 'sine';
+    
+    gainNode.gain.setValueAtTime(0.08, currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
+    
+    oscillator.start(currentTime);
+    oscillator.stop(currentTime + note.duration);
+    
+    currentTime += note.duration;
+  });
 }
 
 function playHindiSong() {
