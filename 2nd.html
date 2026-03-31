@@ -253,12 +253,7 @@ opacity:0;
 <!-- Gallery Section -->
 <div class="gallery">
   <div class="gallery-container">
-    <img class="gallery-img" src="image.jpg" alt="Gallery image" id="galleryImg">
-  </div>
-  <div class="gallery-nav">
-    <button class="gallery-btn" onclick="previousPhoto()">← Previous</button>
-    <span class="gallery-counter"><span id="currentImg">1</span>/<span id="totalImg">1</span></span>
-    <button class="gallery-btn" onclick="nextPhoto()">Next →</button>
+    <img class="gallery-img" src="image.jpg" alt="Our special moment" id="galleryImg">
   </div>
 </div>
 
@@ -303,7 +298,6 @@ opacity:0;
 <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
   <button onclick="celebrate()">🎉 Celebrate!</button>
   <button onclick="playHindiSong()">🎵 Hindi Song</button>
-  <button onclick="toggleMusic()">🎶 Melody</button>
   <button onclick="goBack()">← Back</button>
 </div>
 
@@ -426,12 +420,6 @@ function playMusic() {
 function toggleMusic() {
   playMusic();
   alert('🎵 Romantic melody playing... 💕');
-}
-
-function playSpecialSound() {
-  for (let i = 0; i < 5; i++) {
-    setTimeout(() => playSound(), i * 100);
-  }
 }
 
 function playHindiSong() {
