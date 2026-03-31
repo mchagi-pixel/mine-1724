@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manoj ❤️ Rachel</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#ff4e50,#ff9a9e);
+color:white;
+text-align:center;
+}
+
+/* Love Card */
+.card{
+background:rgba(255,255,255,0.15);
+padding:40px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+width:380px;
+display: none; /* Initially hidden */
+}
+
+/* Initial romantic view */
+.initial-view{
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 30px;
+}
+
+/* Big romantic heart */
+.big-heart{
+font-size: 120px;
+animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat{
+0%, 100%{
+transform: scale(1);
+}
+50%{
+transform: scale(1.1);
+}
+}
+
+/* Click me button */
+.click-me-btn{
+padding: 20px 40px;
+border: 3px solid white;
+border-radius: 50px;
+font-size: 24px;
+background: rgba(255,255,255,0.2);
+color: white;
+cursor: pointer;
+backdrop-filter: blur(10px);
+transition: all 0.3s ease;
+}
+
+.click-me-btn:hover{
+background: rgba(255,255,255,0.3);
+transform: scale(1.05);
+box-shadow: 0 0 30px rgba(255,255,255,0.3);
+}
+
+/* Photo */
+.photo{
+width:220px;
+border-radius:20px;
+border:4px solid white;
+margin-bottom:15px;
+}
+
+/* Button */
+button{
+margin-top:15px;
+padding:12px 28px;
+border:none;
+border-radius:30px;
+font-size:18px;
+background:white;
+color:#ff4e50;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* Floating hearts */
+.heart{
+position:absolute;
+bottom:-20px;
+font-size:20px;
+animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+100%{
+transform:translateY(-100vh);
+opacity:0;
+}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Initial Romantic View -->
+<div class="initial-view">
+<div class="big-heart">💖</div>
+<button class="click-me-btn" onclick="revealLove()">Click Me 💕</button>
+</div>
+
+<!-- Love Card (Initially Hidden) -->
+<div class="card">
+
+<!-- Replace image.jpg with your photo -->
+<img class="photo" src="image.jpg">
+
+<h1>Manoj ❤️ Rachel</h1>
+
+<p>
+Every moment with you is my favorite memory.<br>
+Our love story is just beginning 💖<br>
+<br>
+In your eyes, I found my forever,<br>
+In your smile, my endless joy.<br>
+With every heartbeat, I love you more,<br>
+My dearest Rachel, my heart's true employ 💕
+</p>
+
+</div>
+
+<script>
+
+function revealLove(){
+document.querySelector('.initial-view').style.display = 'none';
+document.querySelector('.card').style.display = 'block';
+}
+
+/* Floating hearts animation */
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(10+Math.random()*30)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+}
+
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
