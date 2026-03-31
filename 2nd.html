@@ -302,7 +302,8 @@ opacity:0;
 <!-- Action Buttons -->
 <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
   <button onclick="celebrate()">🎉 Celebrate!</button>
-  <button onclick="toggleMusic()">🎵 Music</button>
+  <button onclick="playHindiSong()">🎵 Hindi Song</button>
+  <button onclick="toggleMusic()">🎶 Melody</button>
   <button onclick="goBack()">← Back</button>
 </div>
 
@@ -431,6 +432,72 @@ function playSpecialSound() {
   for (let i = 0; i < 5; i++) {
     setTimeout(() => playSound(), i * 100);
   }
+}
+
+function playHindiSong() {
+  // Create an audio element to play Hindi love song from a URL
+  const audio = new Audio();
+  
+  // Using a popular Hindi love song (Tum Hi Ho - Aashiqui 2)
+  // You can replace this with any other Hindi love song URL
+  audio.src = 'https://audio.jukehost.co.uk/stMVjy9GQ2H0s2vLDCKzPXWcWX1lJLDf';
+  
+  // Fallback to creating a simple romantic Hindi tune if URL fails
+  audio.onerror = () => {
+    playHindiMelody();
+    showNotification('Playing romantic Hindi melody 🎵💕');
+  };
+  
+  audio.volume = 0.5;
+  audio.play().then(() => {
+    showNotification('🎵 Hindi Love Song Playing... 💕\n\nTum Hi Ho 🎶');
+  }).catch(() => {
+    playHindiMelody();
+    showNotification('Playing romantic Hindi melody 🎵💕');
+  });
+}
+
+function playHindiMelody() {
+  // Raag-based Hindi melody
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  
+  // Hindi love song notes (based on Tum Hi Ho melody)
+  const notes = [
+    { freq: 440, duration: 0.4 },  // A
+    { freq: 494, duration: 0.4 },  // B
+    { freq: 523, duration: 0.4 },  // C
+    { freq: 587, duration: 0.4 },  // D
+    { freq: 659, duration: 0.6 },  // E
+    { freq: 587, duration: 0.4 },  // D
+    { freq: 523, duration: 0.4 },  // C
+    { freq: 494, duration: 0.4 },  // B
+    { freq: 440, duration: 0.8 },  // A
+  ];
+  
+  let currentTime = audioContext.currentTime;
+  
+  notes.forEach(note => {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = note.freq;
+    oscillator.type = 'sine';
+    
+    gainNode.gain.setValueAtTime(0.1, currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
+    
+    oscillator.start(currentTime);
+    oscillator.stop(currentTime + note.duration);
+    
+    currentTime += note.duration;
+  });
+}
+
+function showNotification(message) {
+  alert(message);
 }
 
 /* Floating hearts animation */
